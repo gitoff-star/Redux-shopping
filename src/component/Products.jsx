@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useDispatch } from "react-redux";
+import { addCart } from "../redux/action";
+import { toast } from "react-toastify";
+import { Button } from "bootstrap";
 
 
 export default function Products() {
@@ -35,7 +39,7 @@ export default function Products() {
     return (  //skeletons
         <>
     
-    <p>Loading..</p>
+    
       <div className="col-md-3">
         <Skeleton height={450}/>
      
@@ -75,15 +79,30 @@ export default function Products() {
         const updatedlist= data.filter((x)=>x.category===cat);
         setFilter(updatedlist);
   }
+  const dispatch = useDispatch();
+  const addProduct = (product) => {
+  const data = addCart(product);
+  toast.success('Product Added!', {
+    position: "top-left",
+    autoClose: 1000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    });
+
+    dispatch(data);
+  };
   const ShowProducts = () => {
     return (
       <>
-        <div className="buttons justify-content-center mb-5 pb-5">
-          <button className="btn btn-outline-dark" onClick={()=>setFilter(data)}>All</button>
-          <button className="btn btn-outline-dark" onClick={()=>filterProduct("men's clothing")}>Men's Clothing</button>
-          <button className="btn btn-outline-dark" onClick={()=>filterProduct("women's clothing")}>Women's Clothing</button>
-          <button className="btn btn-outline-dark"onClick={()=>filterProduct("jewelery")}>Jewelery</button>
-          <button className="btn btn-outline-dark"onClick={()=>filterProduct("electronics")}>Electronics</button>
+        <div className="buttons justify-content-center mb-5 pb-5 flex-wrap">
+          <button className="btn btn-outline-dark space-between" onClick={()=>setFilter(data)}>All</button>
+          <button className="btn btn-outline-dark space-between" onClick={()=>filterProduct("men's clothing")}>Men's Clothing</button>
+          <button className="btn btn-outline-dark space-between" onClick={()=>filterProduct("women's clothing")}>Women's Clothing</button>
+          <button className="btn btn-outline-dark space-between"onClick={()=>filterProduct("jewelery")}>Jewelery</button>
+          <button className="btn btn-outline-dark space-between"onClick={()=>filterProduct("electronics")}>Electronics</button>
         </div>
         {filter==null? <Loading />:  filter.map((product) => {
           return (
@@ -91,16 +110,17 @@ export default function Products() {
               <div className="col-md-3 mb-4 ">
                 <div class="card h-100 p-4 text-center" key={product.id}>
                 <NavLink to={`/product/${product.id}`}>
-                  <img src={product.image} class="card-img-top" alt={product.title} height='200' width='200' />
+                  <img src={product.image} class="card-img-top " style={{objectFit:'contain'}}  alt={product.title} height='200' width='200' />
                   </NavLink>
                   <div class="card-body">
                     <h5 class="card-title mb-0">{product.title.substring(0,12)}...</h5>
                     <p class="card-text lead fw-bold">
                      ${product.price}
                     </p>
-                    <NavLink to={`/product/${product.id}`} class="btn btn-outline-dark ">
-                      Buy Now
+                    <NavLink to={`/product/${product.id}`} class="btn btn-outline-dark space-between ">
+                      Retail
                     </NavLink>
+                    <button className="btn btn-outline-dark" onClick ={() => addProduct(product)}>Add to cart</button>
                   </div>
                 </div>
               </div>

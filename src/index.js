@@ -10,6 +10,7 @@ import {BrowserRouter} from 'react-router-dom'
 import "react-loading-skeleton/dist/skeleton.css";
 import store from './redux/store';
 import {Provider} from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // import '../node_modules/font-awesome/css/font-awesome.min.css';

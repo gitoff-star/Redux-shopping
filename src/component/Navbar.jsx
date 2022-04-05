@@ -84,22 +84,22 @@ useEffect(() => {
             <div className="button">
               <NavLink
                 type="button"
-                className="btn btn-outline-dark"
+                className="btn btn-outline-dark space-between"
                 to="/login"
               >
                 <i className="fa fa-sign-in me-1"></i>Login
               </NavLink>
               <NavLink
                 type="button"
-                className="btn btn-outline-dark"
+                className="btn btn-outline-dark space-between"
                 to="/login"
               >
                 <i className="fa fa-user-plus me-2 "></i>Register
               </NavLink>
               <NavLink
                 type="button"
-                className="btn btn-outline-dark"
-                to="/login"
+                className="btn btn-outline-dark space-between"
+                to="/Cart"
               >
                 <i className="fa fa-shopping-cart me-2"></i>cart({state.length})
               </NavLink>

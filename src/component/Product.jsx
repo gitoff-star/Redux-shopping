@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
+import { toast } from "react-toastify";
 
 export default function Product() {
   const { id } = useParams();
@@ -27,6 +28,15 @@ export default function Product() {
   const addProduct = (product) => {
   const data = addCart(product);
     dispatch(data);
+    toast.success('Deleted succefully!', {
+      position: "top-left",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      });
   };
 
   const Loading = () => {
@@ -68,7 +78,7 @@ export default function Product() {
           <p className="lead fw-normal">{product.description}</p>
           <h3 className="display-3 fw-bold my-4">${product.price}</h3>
           <p className="lead">{product.discription}</p>
-          <button className="btn btn-outline-dark" onClick ={() => addProduct(product)}>Add to cart</button>
+          <button className="btn btn-outline-dark space-between" onClick ={() => addProduct(product)}>Add to cart</button>
           <NavLink
             to="/cart"
             className="btn btn-outline-dark"

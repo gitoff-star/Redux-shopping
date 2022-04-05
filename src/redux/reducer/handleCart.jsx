@@ -2,10 +2,10 @@ const cart = [];
 
 const handleCart = (state = cart, action) => {
   const product = action.payload;
-  console.log(action)
+  // console.log(action)
   switch (action.type) {
-    case "ADDITEM":
-      const exist = state.find((x) => x.id === product.id);
+    case "ADDITEM":    
+      const exist = state.find((x) => x.id === product.id); //check exist and dont add more existance things 
       if (exist) {
         return state.map((x) =>
           x.id === product.id ? { ...x, qty: x.qty + 1 } : x
@@ -19,17 +19,14 @@ const handleCart = (state = cart, action) => {
             qty: 1,
           },
         ];
-      }
+       }
       break;
     case "DELITEM":
-      const exist1 = state.find((x) => x.id === product.id);
-      if (exist.qty === 1) {
-        return state.filter((x) => x.id !== exist1.id);
-      } else {
-        return state.map((x) =>
-          x.id === product.id ? { ...x, qty: x.qty - 1 } : x
-        );
-      }
+
+    return state=state.filter((x)=>{
+      return x.id!==action.payload.id;
+    })
+    
       break;
     default:
         console.log('stateee',state)
