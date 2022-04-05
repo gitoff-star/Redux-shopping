@@ -5,6 +5,7 @@ import { delCart } from "../redux/action";
 import { NavLink } from "react-router-dom";
 
 import { toast, ToastContainer } from "react-toastify";
+import Checkout from "./Checkout";
 
 
 export default function Cart() {
@@ -83,8 +84,9 @@ export default function Cart() {
     return(
     // console.log("button");
     <div className="container">
-    <div className="row">
-      <NavLink to="/checkout" className="btn btn-outline-primary mb-5 w-25 mx-auto" >Proceed to checkout</NavLink>
+    <div className="row justify-content-center">
+    {<Checkout/>}
+      {/* <button  className="btn btn-outline-primary mb-5 w-25 mx-auto" >{<Checkout/>}</button> */}
     </div>
   </div>
 )  

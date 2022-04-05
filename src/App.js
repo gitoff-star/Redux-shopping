@@ -11,6 +11,8 @@ import Login from "./component/Login";
 import Register from "./component/Register";
 import { toast } from "react-toastify";
 import '@stripe/stripe-js';
+import success from "./component/Sucess";
+import cancel from "./component/Cancel";
 
 function App() {
   toast.configure({
@@ -29,6 +31,8 @@ function App() {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/Register" component={Register}/>
         <Route exact path="/Checkout" component={Checkout}/>
+        <Route exact path="/Cancel" component={cancel}/>
+        <Route exact path="/Success" component={success}/>
         
        
       </Switch>
